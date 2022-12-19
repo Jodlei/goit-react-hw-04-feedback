@@ -12,32 +12,28 @@ export const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setbad] = useState(0);
 
-  const options = [good, neutral, bad];
+  const options = { good, neutral, bad };
 
   const handleMakeStat = event => {
     if (event.target.name === 'good') {
-      setGood(state => state + 1);
+      setGood(prevState => prevState + 1);
     }
     if (event.target.name === 'neutral') {
-      setNeutral(state => state + 1);
+      setNeutral(prevState => prevState + 1);
     }
     if (event.target.name === 'bad') {
-      setbad(state => state + 1);
+      setbad(prevState => prevState + 1);
     }
   };
 
   const total = good + neutral + bad;
-
   const positiveFeedbackPercentage = Math.floor((good * 100) / total);
 
   return (
     <Container>
       <WidgetWrap>
         <Section title="Please leave feedback">
-          <FeedbackOptions
-            options={(good, neutral, bad)}
-            onLeaveFeedback={handleMakeStat}
-          />
+          <FeedbackOptions options={options} onLeaveFeedback={handleMakeStat} />
         </Section>
 
         <Section title="Statistics">
